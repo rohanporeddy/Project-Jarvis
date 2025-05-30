@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jarvis - Entertainment Chatbot</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <!-- Main Chat Area -->
+            <div class="col-12 d-flex flex-column h-100">
+                
+                <!-- Header -->
+                <div class="chat-header p-4">
+                    <div class="d-flex align-items-center">
+                        <div class="bot-avatar me-3">
+                            <span class="bot-emoji">🤖</span>
+                        </div>
+                        <div>
+                            <h4 class="mb-1 fw-bold chat-title">Jarvis</h4>
+                            <div class="d-flex align-items-center">
+                                <span class="status-dot me-2"></span>
+                                <small class="text-muted">Ready to have some fun!</small>
+                            </div>
+                        </div>
+                        <div class="ms-auto">
+                            <div class="fun-stats">
+                                <span class="badge bg-gradient-primary rounded-pill px-3 py-2">
+                                    <i data-feather="zap" width="14" height="14"></i>
+                                    Active
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Messages Container -->
+                <div class="chat-container flex-grow-1 overflow-auto p-3" id="chatContainer">
+                    <!-- Welcome Message -->
+                    <div class="message-group mb-4">
+                        <div class="message bot-message">
+                            <div class="message-avatar">
+                                <span class="avatar-emoji">😄</span>
+                            </div>
+                            <div class="message-content">
+                                <div class="message-bubble fun-bubble">
+                                    <p class="mb-2">Hey there! I'm Jarvis, your entertainment companion!</p>
+                                    <p class="mb-0">I'm here to brighten your day with jokes, trivia, riddles, and fun conversations. What sounds entertaining today?</p>
+                                </div>
+                                <small class="message-time text-muted">Just now</small>
+                            </div>
+                        </div>
+                        
+                        <!-- Welcome Quick Replies -->
+                        <div class="quick-replies mt-3" id="welcomeQuickReplies">
+                            <button class="btn btn-fun-primary quick-reply-btn" data-message="Tell me a joke">
+                                <span class="btn-emoji">😂</span>
+                                Tell me a joke
+                            </button>
+                            <button class="btn btn-fun-success quick-reply-btn" data-message="Ask me trivia">
+                                <span class="btn-emoji">🧠</span>
+                                Ask me trivia
+                            </button>
+                            <button class="btn btn-fun-info quick-reply-btn" data-message="Tell me a story">
+                                <span class="btn-emoji">📚</span>
+                                Tell me a story
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Typing Indicator -->
+                <div class="typing-indicator d-none p-3" id="typingIndicator">
+                    <div class="message bot-message">
+                        <div class="message-avatar">
+                            <span class="avatar-emoji typing-emoji">🤔</span>
+                        </div>
+                        <div class="message-content">
+                            <div class="typing-bubble fun-typing">
+                                <div class="typing-dots">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <small class="typing-text">Jarvis is thinking...</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Input -->
+                <div class="chat-input p-4">
+                    <form id="chatForm" class="d-flex gap-3">
+                        <div class="flex-grow-1">
+                            <div class="input-group fun-input-group">
+                                <input 
+                                    type="text" 
+                                    class="form-control fun-input" 
+                                    id="messageInput" 
+                                    placeholder="What's on your mind? Ask me anything fun! 🎉" 
+                                    autocomplete="off"
+                                    maxlength="500"
+                                >
+                                <button class="btn btn-fun-send" type="submit" id="sendButton">
+                                    <span class="send-emoji">🚀</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <!-- Quick Reply Buttons Container -->
+                    <div class="quick-replies mt-2 d-none" id="quickRepliesContainer">
+                        <!-- Quick reply buttons will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Toast -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="errorToast" class="toast" role="alert">
+            <div class="toast-header">
+                <i data-feather="alert-circle" class="text-danger me-2" width="16" height="16"></i>
+                <strong class="me-auto">Error</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body" id="errorToastBody">
+                Something went wrong. Please try again.
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+    
+    <script>
+        // Initialize Feather icons
+        feather.replace();
+    </script>
+</body>
+</html>
